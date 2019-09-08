@@ -1,0 +1,8 @@
+name: ItemUpgrade
+version: 1.0.0
+main: me.BengBeng.itemupgrade.ItemUpgrade
+author: BengBeng
+depend: [MyItems]
+commands:
+  itemupgrade:
+    aliases: [nangcap, iuprade, itemup, cuonghoa]

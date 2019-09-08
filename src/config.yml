@@ -1,0 +1,119 @@
+# !~~~~~~~~~~~~~~~~~~~~~~~~~! #
+#   + MADE BY: [BengBeng] +   #
+#     + VERSION: v1.0.0 +     #
+# !~~~~~~~~~~~~~~~~~~~~~~~~~! #
+
+#Danh sách các vật liệu cho phép nâng cấp:
+#Có thể sử dụng tên hoặc ID, không thể sử dụng data của vật phẩm.
+allow-upgrade-materials:
+- 'BOW'
+- 'WOOD_SWORD'
+- 'STONE_SWORD'
+- 'IRON_SWORD'
+- 'GOLD_SWORD'
+- 'DIAMOND_SWORD'
+- 'WOOD_SPADE'
+- 'STONE_SPADE'
+- 'IRON_SPADE'
+- 'GOLD_SPADE'
+- 'DIAMOND_SPADE'
+- 'WOOD_PICKAXE'
+- 'STONE_PICKAXE'
+- 'IRON_PICKAXE'
+- 'GOLD_PICKAXE'
+- 'DIAMOND_PICKAXE'
+- 'WOOD_AXE'
+- 'STONE_AXE'
+- 'IRON_AXE'
+- 'GOLD_AXE'
+- 'DIAMOND_AXE'
+- 'WOOD_HOE'
+- 'STONE_HOE'
+- 'IRON_HOE'
+- 'GOLD_HOE'
+- 'DIAMOND_HOE'
+- 'LEATHER_HELMET'
+- 'LEATHER_CHESTPLATE'
+- 'LEATHER_LEGGINGS'
+- 'LEATHER_BOOTS'
+- 'CHAINMAIL_HELMET'
+- 'CHAINMAIL_CHESTPLATE'
+- 'CHAINMAIL_LEGGINGS'
+- 'CHAINMAIL_BOOTS'
+- 'IRON_HELMET'
+- 'IRON_CHESTPLATE'
+- 'IRON_LEGGINGS'
+- 'IRON_BOOTS'
+- 'GOLD_HELMET'
+- 'GOLD_CHESTPLATE'
+- 'GOLD_LEGGINGS'
+- 'GOLD_BOOTS'
+- 'DIAMOND_HELMET'
+- 'DIAMOND_CHESTPLATE'
+- 'DIAMOND_LEGGINGS'
+- 'DIAMOND_BOOTS'
+
+#Âm thanh khi cường hoá:
+SOUND:
+  #Khi cường hoá thành công:
+  success:
+    #Tên âm thanh:
+    name: block_anvil_use
+    #Tầm xa của âm thanh (mặc định: 4.0):
+    distance: 4.0
+    #Cao độ (mặc định: 1.0):
+    high: 1.0
+  #Khi cường hoá thất bại:
+  failure:
+    name: block_anvil_destroy
+    distance: 4.0
+    high: 1.0
+
+#Cấp độ tối đa cho vật phẩm:
+max-level: 10
+
+#Phần định dạng cấp độ cho vật phẩm:
+#Để thêm cấp độ mà bạn muốn, hãy sử dụng định dạng như sau:
+#FORMAT:
+#  level-<cấp độ>: '<định dạng của bạn>'
+FORMAT:
+  #Định dạng cấp độ 1:
+  level-1: '&8[&f+1&8]'
+  level-2: '&8[&a+2&8]'
+  level-3: '&8[&3+3&8]'
+  level-4: '&8[&d+4&8]'
+  level-5: '&8[&e+5&8]'
+  level-6: '&8[&b+6&8]'
+  level-7: '&8[&6+7&8]'
+  level-8: '&8[&c+8&8]'
+  level-9: '&8[&5+9&8]'
+  level-10: '&8[&4+10&8]'
+
+#Tỉ lệ thành công khi cường hoá từ a -> b của vật phẩm:
+#Định dạng như sau: ##.## (ví dụ: 52.75, 5.25).
+#Thêm tỉ lệ cường hoá mà bạn muốn bằng định dạng như sau:
+#SUCCESS-CHANCE:
+#  level-<cấp độ>: <tỉ lệ>
+SUCCESS-CHANCE:
+  #Khi cường hoá lên cấp độ 1:
+  level-1: 100.0
+  #Khi cường hoá lên cấp độ 2:
+  level-2: 90.0
+  #Khi cường hoá lên cấp độ 3:
+  level-3: 80.0
+  level-4: 70.0
+  level-5: 60.0
+  level-6: 50.0
+  level-7: 40.0
+  level-8: 30.0
+  level-9: 20.0
+  level-10: 10.0
+
+#Các quyền lợi của plugin:
+#Có thể thay đổi trực tiếp tại đây.
+PERMISSIONS:
+  Admin: itemupgrade.admin
+  Help: itemupgrade.command.help
+  Open: itemupgrade.command.open
+  Give: itemupgrade.command.give
+  Reload: itemupgrade.command.reload

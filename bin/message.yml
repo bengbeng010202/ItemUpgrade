@@ -1,0 +1,50 @@
+PREFIX: '&6[&bItemUpgrade&6]&r '
+
+HELP:
+  header: '&6&l------=====[ &b&lItemUpgrade &a&lv{version} &6&l]=====------'
+  help: '&8 > &6/&e{label} [help|?] &f: &7Hiển thị trợ giúp này.'
+  open: '&8 > &6/&e{label} &f: &7Mở GUI cường hoá vật phẩm.'
+  give: '&8 > &6/&e{label} give <type> <tên> [người chơi] [số lượng] &f: &7Trao vật phẩm.'
+  reload: '&8 > &6/&e{label} reload &f: &7Làm mới tập tin.'
+  footer: '&6&l------------------------------------------------'
+
+SUCCESS:
+  config-reload: '{prefix}&aHoàn tất làm mới lại tập tin!'
+  
+  Open:
+    done: '{prefix}&aĐã mở GUI cường hoá vật phẩm!'
+  
+  Give:
+    self: '{prefix}&7Bạn đã lấy &ex{amount} {item}&7.'
+    sender: '{prefix}&7Đã trao &ex{amount} {item} &7cho &b{player}&7.'
+    target: '{prefix}&7Đã nhận được &ex{amount} {item} &7từ &b{sender}&7.'
+  
+  ON-GUI:
+    upgrade-successfully: '{prefix}&aCường hoá vật phẩm thành công!'
+    upgrade-failure: '{prefix}&cCường hoá vật phẩm thất bại!'
+
+FAIL:
+  no-permission: '{prefix}&cBạn không có quyền để có thể làm điều này!'
+  too-many-args: '{prefix}&cBạn đã nhập quá nhiều đối tượng của câu lệnh!'
+  only-player: '{prefix}&cChỉ người chơi mới có thể sử dụng câu lệnh này!'
+  must-choose-type: '{prefix}&cVui lòng chọn loại vật phẩm mà bạn muốn!'
+  invalid-type: '{prefix}&cLoại vật phẩm &e{value} &ckhông hợp lệ!'
+  must-type-name: '{prefix}&cVui lòng nhập tên xác định của vật phẩm!'
+  key-not-exist: '{prefix}&cTên xác định &e{value} &ckhông tồn tại!'
+  must-specify-player: '{prefix}&cVui lòng chỉ định một người chơi đang trực tuyến!'
+  player-not-found: '{prefix}&cNgười chơi &e{value} &ckhông tồn tại hoặc đang ngoại tuyến!'
+  not-number: '{prefix}&cGiá trị &e{value} &ckhông phải là một con số hợp lệ!'
+
+ERROR:
+
+  ON-GUI:
+    not-allow-material: '{prefix}&cVật phẩm của bạn không cho phép để nâng cấp!'
+    item-reached-max-level: '{prefix}&cVật phẩm của bạn đã đạt cấp độ cao nhất!'
+    item-does-not-have-stats: '{prefix}&cVật phẩm của bạn không chứa bất kì thuộc tính nào để nâng cấp!'
+    not-valid-upgrade-item: '{prefix}&cĐá nâng cấp không hợp lệ!'
+    not-valid-luck-item: '{prefix}&cBùa may mắn không hợp lệ!'
+    not-valid-level-item: '{prefix}&cBùa giữ cấp không hợp lệ!'
+    not-valid-fairy-item: '{prefix}&cHạt đậu tiên không hợp lệ!'
+    
+    item-to-upgrade-is-null: '{prefix}&cThiếu vật phẩm cần nâng cấp!'
+    upgrade-item-is-null: '{prefix}&cThiếu đá nâng cấp!'

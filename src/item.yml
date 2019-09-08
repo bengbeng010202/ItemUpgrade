@@ -1,0 +1,80 @@
+#Các loại đá nâng cấp (đá cường hoá):
+UPGRADE:
+  #Tên xác định (đặt tự do):
+  # * LƯU Ý: Khi muốn lấy đá cường hoá mà bạn muốn,
+  #bạn sẽ phải sử dụng tên này.
+  example:
+    #Loại vật phẩm:
+    # * LƯU Ý: Đặt trong cặp dấu ''
+    #type: '<tên hoặc ID>:<số lượng>:<dữ liệu (data)>'
+    type: '318:1:0'
+    #Tên hiển thị của vật phẩm:
+    name: '&6&lĐÁ CƯỜNG HOÁ'
+    #Hiệu ứng phù phép cho vật phẩm ?
+    glow: true
+    #Các dòng mô tả cho vật phẩm:
+    lore:
+    - '&7+ Một loại vật phẩm không thể'
+    - '&7thiếu khi cường hoá.'
+    - ''
+    - '&8[&f!&8] &7&oBỎ VÀO Ô ĐÁ CƯỜNG HOÁ &8[&f!&8]'
+
+#Các loại bùa may mắn:
+LUCK:
+  example:
+    type: 'paper:1:0'
+    name: '&b&lBÙA MAY MẮN'
+    glow: true
+    lore:
+    - '&7+ Giúp tăng thêm tỉ lệ thành công.'
+    - ''
+    - '&8 > &7Tăng thêm: &65.0%'
+    - ''
+    - '&8[&f!&8] &7&oBỎ VÀO Ô BÙA MAY MẮN &8[&f!&8]'
+    #Tỉ lệ thành công cộng thêm:
+    chance: 5.0
+  master:
+    type: 'paper:1:0'
+    name: '&b&lBÙA MAY MẮN - &8[&cMASTER&8]'
+    glow: true
+    lore:
+    - '&7+ Giúp tăng thêm tỉ lệ thành công.'
+    - ''
+    - '&8 > &7Tăng thêm: &615.0%'
+    - ''
+    - '&8[&f!&8] &7&oBỎ VÀO Ô BÙA MAY MẮN &8[&f!&8]'
+    #Tỉ lệ thành công cộng thêm:
+    chance: 15.0
+
+#Các loại bùa giữ cấp:
+LEVEL:
+  example:
+    type: '388:1:0'
+    name: '&a&lBÙA GIỮ CẤP'
+    glow: true
+    lore:
+    - '&7+ Giúp giữ lại cấp độ của vật'
+    - '&7phẩm khi cường hoá thất bại.'
+    - ''
+    - '&7+ Vật phẩm sẽ chỉ bị trừ đi khi'
+    - '&7cường hoá thất bại. Cường hoá'
+    - '&7thành công sẽ không bị trừ.'
+    - ''
+    - '&8[&f!&8] &7&oBỎ VÀO Ô BÙA GIỮ CẤP &8[&f!&8]'
+
+#Các loại bùa tiên (hạt đậu tiên):
+FAIRY:
+  example:
+    type: '371:1:0'
+    name: '&d&lHẠT ĐẬU TIÊN'
+    glow: true
+    lore:
+    - '&7+ Hạt đậu có thể giúp bạn giữ'
+    - '&7lại tất cả vật phẩm mà bạn đã'
+    - '&7đặt trong trang nâng cấp khi'
+    - '&7cường hoá thất bại.'
+    - ''
+    - '&7+ Có thể giữ lại cấp độ của vật'
+    - '&7phẩm khi cường hoá thất bại.'
+    - ''
+    - '&8[&f!&8] &7&oBỎ VÀO Ô ĐẬU TIÊN &8[&f!&8]'
