@@ -15,11 +15,8 @@ import org.bukkit.command.CommandMap;
 import org.bukkit.command.PluginCommand;
 import org.bukkit.command.SimpleCommandMap;
 import org.bukkit.event.HandlerList;
-import org.bukkit.plugin.InvalidDescriptionException;
-import org.bukkit.plugin.InvalidPluginException;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.PluginManager;
-import org.bukkit.plugin.UnknownDependencyException;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.plugin.java.JavaPluginLoader;
 
@@ -40,11 +37,7 @@ public class ItemUpgrade
 			Utils.sendConsoleMessage("&6[&bItemUpgrade&6] &cKhông thể tìm thấy plugin yêu cầu: &eMyItems&c.",
 					"&6[&bItemUpgrade&6] &cVui lòng cài đặt plugin yêu cầu trước khi khởi động plugin này!",
 					"&6[&bItemUpgrade&6] &cTự động dùng lại plugin...");
-			try {
-				unloadPlugin(this, true);
-			} catch (Exception ex) {
-				ex.printStackTrace();
-			}
+			unloadPlugin(this, true);
 			return;
 		} else {
 			Utils.sendConsoleMessage("&6[&bItemUpgrade&6] &aĐã tìm thấy plugin yêu cầu: &eMyItems&a.");
@@ -93,22 +86,18 @@ public class ItemUpgrade
 		Bukkit.getServer().getPluginManager().enablePlugin(plugin);
 	}
 	
-	public Plugin loadPlugin(File plugin) throws UnknownDependencyException, InvalidDescriptionException {
+	public Plugin loadPlugin(File plugin) {
 		try {
 			Plugin p = Bukkit.getPluginManager().loadPlugin(plugin);
-			try {
-				p.onLoad();
-			} catch (Exception ex) {
-				ex.printStackTrace();
-			}
+			p.onLoad();
 			return p;
-		} catch (InvalidPluginException ex) {
+		} catch (Exception ex) {
 			ex.printStackTrace();
 			return null;
 		}
 	}
 	
-	public boolean unloadPlugin(Plugin plugin, boolean ReloadDependents) throws UnknownDependencyException, InvalidDescriptionException {
+	public boolean unloadPlugin(Plugin plugin, boolean ReloadDependents) {
 		PluginManager pluginManager = Bukkit.getServer().getPluginManager();
 		String pName = plugin.getName();
 		ArrayList<Plugin> reload = new ArrayList<Plugin>();
