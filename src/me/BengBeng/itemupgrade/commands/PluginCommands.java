@@ -1,5 +1,8 @@
 package me.BengBeng.itemupgrade.commands;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -21,6 +24,8 @@ public class PluginCommands
 	private String itemReg = "(?ium)(\\{item}|\\%item%)";
 	private String senderReg = "(?ium)(\\{sender}|\\%sender%)";
 	private String playerReg = "(?ium)(\\{player}|\\%player%)";
+	private String typeReg = "(?ium)(\\{type}|\\%type%)";
+	private String listReg = "(?ium)(\\{list}|\\%list%)";
 	
 	private String adminPerm = Config.getConfig().getString("PERMISSIONS.Admin");
 	
@@ -55,13 +60,33 @@ public class PluginCommands
 			if((sender.hasPermission(adminPerm)) || (sender.hasPermission(Config.getConfig().getString("PERMISSIONS.Open")))) {
 				Utils.sendMessage(sender, Config.getMessage().getString("HELP.open").replaceAll(labelReg, label));
 			}
+			if((sender.hasPermission(adminPerm)) || (sender.hasPermission(Config.getConfig().getString("PERMISSIONS.Type")))) {
+				Utils.sendMessage(sender, Config.getMessage().getString("HELP.type").replaceAll(labelReg, label));
+			}
 			if((sender.hasPermission(adminPerm)) || (sender.hasPermission(Config.getConfig().getString("PERMISSIONS.Give")))) {
 				Utils.sendMessage(sender, Config.getMessage().getString("HELP.give").replaceAll(labelReg, label));
+			}
+			if((sender.hasPermission(adminPerm)) || (sender.hasPermission(Config.getConfig().getString("PERMISSIONS.List")))) {
+				Utils.sendMessage(sender, Config.getMessage().getString("HELP.list").replaceAll(labelReg, label));
 			}
 			if((sender.hasPermission(adminPerm)) || (sender.hasPermission(Config.getConfig().getString("PERMISSIONS.Reload")))) {
 				Utils.sendMessage(sender, Config.getMessage().getString("HELP.reload").replaceAll(labelReg, label));
 			}
 			Utils.sendMessage(sender, Config.getMessage().getString("HELP.footer").replaceAll(versionReg, Utils.getMain().getDescription().getVersion()));
+			return true;
+		}
+		if(Utils.regexMatches(cmd, "type")) {
+			if((!sender.hasPermission(adminPerm)) && (!sender.hasPermission(Config.getConfig().getString("PERMISSIONS.Type")))) {
+				Utils.sendMessage(sender, noPerm);
+				return true;
+			}
+			List<String> types = new ArrayList<String>();
+			for(Type list : Type.values()) {
+				types.add(list.getTypeName());
+			}
+			int size = types.size();
+			String toString = types.toString().replaceAll("(\\[|\\])", "");
+			Utils.sendMessage(sender, Config.getMessage().getString("SUCCESS.Type.done").replaceAll(amountReg, String.valueOf(size)).replaceAll(listReg, toString));
 			return true;
 		}
 		if(Utils.regexMatches(cmd, "give")) {
@@ -160,6 +185,37 @@ public class PluginCommands
 				return true;
 			}
 			if(args.length > 5) {
+				Utils.sendMessage(sender, tooMany);
+				return true;
+			}
+			return true;
+		}
+		if(Utils.regexMatches(cmd, "list")) {
+			if((!sender.hasPermission(adminPerm)) && (!sender.hasPermission(Config.getConfig().getString("PERMISSIONS.List")))) {
+				Utils.sendMessage(sender, noPerm);
+				return true;
+			}
+			if(args.length == 1) {
+				Utils.sendMessage(sender, Config.getMessage().getString("FAIL.must-choose-type"));
+				return true;
+			}
+			if(args.length == 2) {
+				String strType = String.valueOf(args[1]).toUpperCase();
+				if(!Type.isValid(strType)) {
+					Utils.sendMessage(sender, Config.getMessage().getString("FAIL.invalid-type").replaceAll(valueReg, args[1]));
+					return true;
+				}
+				Type type = Type.valueOf(strType);
+				
+				List<String> list = Utils.getItem(type).getItems();
+				int size = list.size();
+				String toString = list.toString().replaceAll("(\\[|\\])", "");
+				
+				Utils.sendMessage(sender, Config.getMessage().getString("SUCCESS.List.done").replaceAll(amountReg, String.valueOf(size)).replaceAll(typeReg, type.getTypeName()).replaceAll(listReg, toString));
+				
+				return true;
+			}
+			if(args.length > 2) {
 				Utils.sendMessage(sender, tooMany);
 				return true;
 			}

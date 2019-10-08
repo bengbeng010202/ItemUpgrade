@@ -1,5 +1,11 @@
 package me.BengBeng.itemupgrade.utils;
 
+import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
@@ -15,6 +21,8 @@ import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.scheduler.BukkitRunnable;
+import org.bukkit.scheduler.BukkitTask;
 
 import api.praya.myitems.enums.LoreStatsEnum;
 import api.praya.myitems.enums.OptionStatsEnum;
@@ -50,6 +58,11 @@ public class Utils {
 	public synchronized static Item getItem(Type type, String key) {
 		item.setType(type);
 		item.setKey(key);
+		return item;
+	}
+	
+	public synchronized static Item getItem(Type type) {
+		item.setType(type);
 		return item;
 	}
 	
@@ -326,6 +339,95 @@ public class Utils {
 	
 	
 	/*
+	 * KIỂM TRA PHIÊN BẢN:
+	 */
+	
+	public static boolean checkForUpdate() {
+		return (Config.getConfig().getBoolean("check-update") == true);
+	}
+	
+	public static int getNotifyUpdateTime() {
+		return Config.getConfig().getInt("notify-update-time");
+	}
+	
+	private static BukkitTask update;
+	
+	public static BukkitTask getUpdate() {
+		return update;
+	}
+	
+	public static void setUpdate(BukkitTask update) {
+		Utils.update = update;
+	}
+	
+	public static void checkVersion() {
+		String cur = getMain().getDescription().getVersion();
+		int current = Integer.parseInt(cur.replace(".", ""));
+		String data = action("https://gist.github.com/bengbeng010202/61e27d7ea9e17b87c4ccbfc99c4f6b83/raw/itemupgrade_version");
+		String newVer = data.substring(0, data.indexOf('|'));
+		int newVersion = Integer.parseInt(newVer.replaceAll("(?ium)(v|\\.)", ""));
+		String url = data.substring(data.indexOf('|') + 1);
+		if(checkForUpdate()) {
+			if(current < newVersion) {
+				setUpdate(new BukkitRunnable() {
+					@Override
+					public void run() {
+						List<String> list = Config.getMessage().getStringList("update-available");
+						for(String msg : list) {
+							msg = toColor(msg.replaceAll("(?ium)(\\{plugin}|\\%plugin%)", getMain().getDescription().getName())
+									.replaceAll("(?ium)(\\{version}|\\%version%)", cur)
+									.replaceAll("(?ium)(\\{new(\\_)?ver(sion)?}|\\%new(\\_)?ver(sion)?%)", newVer)
+									.replaceAll("(?ium)(\\{link}|\\%link%)", url));
+							sendUpdateMessage(msg);
+						}
+					}
+				}.runTaskTimerAsynchronously(getMain(), 20, 20 * getNotifyUpdateTime()));
+			} else {
+				sendUpdateMessage("{prefix}&aYou're using the lastest version of plugin &e" + getMain().getDescription().getFullName());
+			}
+		}
+	}
+	
+	public static String action(String link) {
+		URL url = null;
+		InputStream in = null;
+		InputStreamReader isr = null;
+		BufferedReader reader = null;
+		StringBuilder stringBuilder = new StringBuilder();
+		
+		try {
+			url = new URL(link);
+			HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+			connection.setRequestProperty("User-Agent", "Mozilla/65");
+			
+			connection.setRequestMethod("GET");
+			connection.setReadTimeout(10000);
+			connection.connect();
+			
+			in = connection.getInputStream();
+			isr = new InputStreamReader(in, StandardCharsets.UTF_8);
+			reader = new BufferedReader(isr);
+			
+			String line = null;
+			
+			while((line = reader.readLine()) != null) {
+				stringBuilder.append(line);
+			}
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		} finally {
+			try {
+				reader.close();
+			} catch (Exception ex) {
+				ex.printStackTrace();
+			}
+		}
+		return stringBuilder.toString();
+	}
+	
+	
+	
+	/*
 	 * CÁC PHẦN KHÁC:
 	 */
 	
@@ -408,6 +510,20 @@ public class Utils {
 		}
 	}
 	
+	public static void sendStaffMessage(String... msg) {
+		for(int x = 0; x < msg.length; x++) {
+			String newMsg = toColor(msg[x]);
+			for(Player online : Bukkit.getServer().getOnlinePlayers()) {
+				if(online != null) {
+					String name = online.getName();
+					if(getUser(name).isStaff()) {
+						online.sendMessage(newMsg);
+					}
+				}
+			}
+		}
+	}
+	
 	public static void sendConsoleMessage(String... msg) {
 		for(int x = 0; x < msg.length; x++) {
 			String newMsg = toColor(msg[x]);
@@ -427,6 +543,11 @@ public class Utils {
 				}
 			}
 		}
+	}
+	
+	public static void sendUpdateMessage(String... msg) {
+		sendConsoleMessage(msg);
+		sendStaffMessage(msg);
 	}
 	
 }

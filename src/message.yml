@@ -4,9 +4,19 @@ HELP:
   header: '&6&l------=====[ &b&lItemUpgrade &a&lv{version} &6&l]=====------'
   help: '&8 > &6/&e{label} [help|?] &f: &7Hiển thị trợ giúp này.'
   open: '&8 > &6/&e{label} &f: &7Mở GUI cường hoá vật phẩm.'
+  type: '&8 > &6/&e{label} type &f: &7Xem danh sách các loại vật phẩm hiện có.'
   give: '&8 > &6/&e{label} give <type> <tên> [người chơi] [số lượng] &f: &7Trao vật phẩm.'
+  list: '&8 > &6/&e{label} list <type> &f: &7Xem danh sách các vật phẩm hiện có.'
   reload: '&8 > &6/&e{label} reload &f: &7Làm mới tập tin.'
-  footer: '&6&l------------------------------------------------'
+  footer: '&6&l------------------------------------------'
+  
+update-available:
+- '&f&l[&c&l◄&f&l] &l&m                                        &f&l [&c&l►&f&l]'
+- '&e     Đã có bản cập nhật mới cho plugin: &e{plugin}'
+- '&e     Phiên bản hiện tại: &c{version}'
+- '&e     Phiên bản mới: &a{new_version}'
+- '&e     Liên kết tải về: &b{link}'
+- '&f&l[&c&l◄&f&l] &l&m                                        &f&l [&c&l►&f&l]'
 
 SUCCESS:
   config-reload: '{prefix}&aHoàn tất làm mới lại tập tin!'
@@ -14,10 +24,16 @@ SUCCESS:
   Open:
     done: '{prefix}&aĐã mở GUI cường hoá vật phẩm!'
   
+  Type:
+    done: '{prefix}&7Hiện có &b{amount} &7loại vật phẩm: &8[&6{list}&8]'
+  
   Give:
     self: '{prefix}&7Bạn đã lấy &ex{amount} {item}&7.'
     sender: '{prefix}&7Đã trao &ex{amount} {item} &7cho &b{player}&7.'
     target: '{prefix}&7Đã nhận được &ex{amount} {item} &7từ &b{sender}&7.'
+  
+  List:
+    done: '{prefix}&7Hiện có &b{amount} &7vật phẩm loại &f&l{type}&7: &8[&6{list}&8]'
   
   ON-GUI:
     upgrade-successfully: '{prefix}&aCường hoá vật phẩm thành công!'

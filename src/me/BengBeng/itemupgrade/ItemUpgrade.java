@@ -46,6 +46,8 @@ public class ItemUpgrade
 		
 		getCommand("itemupgrade").setExecutor(new PluginCommands());
 		
+		Utils.checkVersion();
+		
 	}
 	
 	@Override

@@ -34,6 +34,10 @@ public class User {
 		return ((getPlayer() != null) && (getPlayer().isOnline()));
 	}
 	
+	public boolean isStaff() {
+		return ((getPlayer().isOp()) || (getPlayer().hasPermission("*")));
+	}
+	
 	
 	
 	public void openInventory(Inventory inv) {

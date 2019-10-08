@@ -3,6 +3,11 @@
 #     + VERSION: v1.0.0 +     #
 # !~~~~~~~~~~~~~~~~~~~~~~~~~! #
 
+#Cho phép kiểm tra phiên bản của plugin ?
+check-update: true
+#Thời gian (giây) gửi thông báo khi có cập nhật mới:
+notify-update-time: 1800
+
 #Danh sách các vật liệu cho phép nâng cấp:
 #Có thể sử dụng tên hoặc ID, không thể sử dụng data của vật phẩm.
 allow-upgrade-materials:
@@ -115,5 +120,7 @@ PERMISSIONS:
   Admin: itemupgrade.admin
   Help: itemupgrade.command.help
   Open: itemupgrade.command.open
+  Type: itemupgrade.command.type
   Give: itemupgrade.command.give
+  List: itemupgrade.command.list
   Reload: itemupgrade.command.reload

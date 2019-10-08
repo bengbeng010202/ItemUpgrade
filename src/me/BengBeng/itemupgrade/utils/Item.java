@@ -1,5 +1,6 @@
 package me.BengBeng.itemupgrade.utils;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.bukkit.Material;
@@ -205,6 +206,17 @@ public class Item {
 	
 	public double getChance() {
 		return item.getDouble(getType().getTypeName() + "." + getKey() + ".chance");
+	}
+	
+	
+	
+	public List<String> getItems() {
+		List<String> list = new ArrayList<String>();
+		String type = getType().getTypeName();
+		for(String key : item.getConfigurationSection(type).getKeys(false)) {
+			list.add(key);
+		}
+		return list;
 	}
 	
 }

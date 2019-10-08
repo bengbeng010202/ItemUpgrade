@@ -1,5 +1,5 @@
 name: ItemUpgrade
-version: 1.0.0
+version: 1.0.1
 main: me.BengBeng.itemupgrade.ItemUpgrade
 author: BengBeng
 depend: [MyItems]
